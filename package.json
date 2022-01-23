@@ -1,0 +1,20 @@
+{
+  "name": "NFTStaker",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "npx hardhat test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@openzeppelin/contracts": "^4.3.2",
+    "@rari-capital/solmate": "^6.2.0",
+    "base64-sol": "",
+    "chai": "^4.3.4",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.4"
+  }
+}
