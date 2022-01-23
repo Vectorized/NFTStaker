@@ -206,6 +206,8 @@ describe('NFTStaker', function () {
 	
 		expect(rates.join(',')).to.equal(groundTruthRates.join(','));
 
+		expect((await NFTStaker.connect(signers[0]).getNFTRates([193]))[0] + '')
+			.to.equal(groundTruthRates[193] + '');
 	})
 
 });
