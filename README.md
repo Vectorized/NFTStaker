@@ -1,6 +1,7 @@
-Gass optimized NFT staker.
+Gas optimized NFT staker
+========================
 
-Install:
+**Install:**
 
 cd into the directory and run
 
@@ -8,7 +9,7 @@ cd into the directory and run
 npm install
 ```
 
-Test:
+**Test:**
 
 ```
 npx hardhat test
