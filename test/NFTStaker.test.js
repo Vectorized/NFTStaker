@@ -163,7 +163,7 @@ describe('NFTStaker', function () {
 
 	})
 
-	it('Stake and Harvest.', async function () {
+	it('Set and get rates.', async function () {
 		var n = 1000;
 		var groundTruthRates = [];
 		const BITWIDTH_RATE = 4; // Min number of bits to represent 1 ... NUM_TIERS
