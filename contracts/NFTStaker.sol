@@ -217,4 +217,23 @@ contract NFTStaker is Ownable, ReentrancyGuard {
         IERC20(coin).transfer(msg.sender, amount);
         return amount;
     }
+
+    function getNFTRates(uint[] memory _tokenIds) external view returns (uint[] memory) {
+        uint n = _tokenIds.length;
+        uint[] memory a = new uint[](n);
+        
+        for (uint i = 0; i < n; ++i) {
+            uint tokenId = _tokenIds[i];
+            uint u = (tokenId / BITMOD_RATE);
+            uint v = (tokenId % BITMOD_RATE) * BITWIDTH_RATE;
+            uint rate = 0;
+
+            rate = (nftRates[u] >> v) & BITMASK_RATE;
+            if (rate == 0) {
+                rate = DEFAULT_RATE;
+            }
+            a[i] = rate;
+        }
+        return a;
+    }
 }
