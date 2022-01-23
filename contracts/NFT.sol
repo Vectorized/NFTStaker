@@ -14,8 +14,8 @@ contract NFT is ERC721Enumerable {
 
     function mint(uint _numTokens) public {
         for (uint i = 0; i < _numTokens; i++) {
-            uint tokenId = totalSupply();
-            require(tokenId < MAX_TOKENS, "No more tokens available.");
+            uint tokenId = totalSupply() + 1;
+            require(tokenId <= MAX_TOKENS, "No more tokens available.");
             _safeMint(msg.sender, tokenId);
         }
     }

@@ -165,14 +165,14 @@ describe('NFTStaker', function () {
 
 	it('Set and get rates.', async function () {
 		var n = 1000;
-		var groundTruthRates = [];
+		var groundTruthRates = [0];
 		const BITWIDTH_RATE = 4; // Min number of bits to represent 1 ... NUM_TIERS
 		const BITMOD_RATE = 256 / BITWIDTH_RATE;
-		for (var i = 0; i < n; ++i) {
+		for (var i = 1; i <= n; ++i) {
 			groundTruthRates.push(1 + Math.floor(Math.random() * 10));
 		}
 		var nftRates = {indices: [], rates: []};
-		for (var i = 0; i < Math.ceil(n / BITMOD_RATE); ++i) {
+		for (var i = 0; i < Math.ceil( (n+1) / BITMOD_RATE); ++i) {
 			var a = [];
 			for (var j = 0; j < BITMOD_RATE; ++j) {
 				a.push('0');
@@ -180,31 +180,30 @@ describe('NFTStaker', function () {
 			nftRates.indices.push(i);
 			nftRates.rates.push(a);
 		}
-		for (var i = 0; i < n; ++i) {
+		for (var i = 1; i <= n; ++i) {
 			var tokenId = i;
 			var rate = groundTruthRates[i];
 
 			var u = Math.floor(tokenId / BITMOD_RATE);
 		    var v = (tokenId % BITMOD_RATE);
 		    
-
 		    nftRates.rates[u][v] = rate.toString(16);
 		}
 
-		for (var i = 0; i < Math.ceil(n / BITMOD_RATE); ++i) {
+		for (var i = 0; i < Math.ceil( (n+1) / BITMOD_RATE); ++i) {
 			nftRates.rates[i] = '0x' + nftRates.rates[i].reverse().join('');
 		}
 
 		await NFTStaker.connect(signers[0]).setNFTRates(nftRates.indices, nftRates.rates);
 
 		var tokenIds = [];
-		for (var i = 0; i < n; ++i) {
+		for (var i = 1; i <= n; ++i) {
 			tokenIds.push(i);
 		}
 		var rates = await NFTStaker.connect(signers[0]).getNFTRates(tokenIds);
 
 	
-		expect(rates.join(',')).to.equal(groundTruthRates.join(','));
+		expect(rates.join(',')).to.equal(groundTruthRates.slice(1).join(','));
 
 		expect((await NFTStaker.connect(signers[0]).getNFTRates([193]))[0] + '')
 			.to.equal(groundTruthRates[193] + '');
