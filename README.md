@@ -15,7 +15,7 @@ npm install
 npx hardhat test
 ```
 
-To generate packed rates:
+**To generate packed rates:**
 1. cd into `rates_packer` directory.
 2. Edit the `rarities.json`.
 3. Run `node pack.js`
